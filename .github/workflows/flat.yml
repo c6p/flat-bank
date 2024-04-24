@@ -35,6 +35,12 @@ jobs:
           http_url: https://www.cepteteb.com.tr/services/GetGunlukDovizKur
           downloaded_filename: teb-current.json
           postprocess: teb.js
+      - name: Fetch vakifbank data
+        uses: githubocto/flat@v3
+        with:
+          http_url: https://subesizbankacilik.vakifbank.com.tr/gunlukfinans/SubesizBankacilik/GunlukDovizKurlari.aspx
+          downloaded_filename: vakif-current.html
+          postprocess: vakif.js
       - name: Fetch isbank data
         uses: githubocto/flat@v3
         with:
