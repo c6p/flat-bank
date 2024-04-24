@@ -17,15 +17,21 @@ jobs:
           deno-version: v1.x
       - name: Check out repo
         uses: actions/checkout@v3
-      - name: Fetch data
+      - name: Fetch akbank data
         uses: githubocto/flat@v3
         with:
           http_url: https://www.akbank.com/_vti_bin/AkbankServicesSecure/FrontEndServiceSecure.svc/GetCurrencyRates
           downloaded_filename: akbank-current.json
           postprocess: akbank.js
-      - name: Fetch data
+      - name: Fetch isbank data
         uses: githubocto/flat@v3
         with:
           http_url: https://www.isbank.com.tr/_vti_bin/DV.Isbank/PriceAndRate/PriceAndRateService.svc/GetFxRates
           downloaded_filename: isbank-current.json
           postprocess: isbank.js
+      - name: Fetch enpara data
+        uses: githubocto/flat@v3
+        with:
+          http_url: https://www.qnbfinansbank.enpara.com/hesaplar/doviz-ve-altin-kurlari
+          downloaded_filename: enpara-current.html
+          postprocess: enpara.js
