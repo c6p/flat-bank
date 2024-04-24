@@ -19,30 +19,35 @@ jobs:
         uses: actions/checkout@v3
       - name: Fetch akbank data
         uses: githubocto/flat@v3
+        if: '!cancelled()'
         with:
           http_url: https://www.akbank.com/_vti_bin/AkbankServicesSecure/FrontEndServiceSecure.svc/GetCurrencyRates
           downloaded_filename: akbank-current.json
           postprocess: akbank.js
       - name: Fetch enpara data
         uses: githubocto/flat@v3
+        if: '!cancelled()'
         with:
           http_url: https://www.qnbfinansbank.enpara.com/hesaplar/doviz-ve-altin-kurlari
           downloaded_filename: enpara-current.html
           postprocess: enpara.js
       - name: Fetch teb data
         uses: githubocto/flat@v3
+        if: '!cancelled()'
         with:
           http_url: https://www.cepteteb.com.tr/services/GetGunlukDovizKur
           downloaded_filename: teb-current.json
           postprocess: teb.js
       - name: Fetch vakifbank data
         uses: githubocto/flat@v3
+        if: '!cancelled()'
         with:
           http_url: https://subesizbankacilik.vakifbank.com.tr/gunlukfinans/SubesizBankacilik/GunlukDovizKurlari.aspx
           downloaded_filename: vakif-current.html
           postprocess: vakif.js
       - name: Fetch isbank data
         uses: githubocto/flat@v3
+        if: '!cancelled()'
         with:
           http_url: https://www.isbank.com.tr/_vti_bin/DV.Isbank/PriceAndRate/PriceAndRateService.svc/GetFxRates
           downloaded_filename: isbank-current.json
