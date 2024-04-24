@@ -29,6 +29,12 @@ jobs:
           http_url: https://www.qnbfinansbank.enpara.com/hesaplar/doviz-ve-altin-kurlari
           downloaded_filename: enpara-current.html
           postprocess: enpara.js
+      - name: Fetch teb data
+        uses: githubocto/flat@v3
+        with:
+          http_url: https://www.cepteteb.com.tr/services/GetGunlukDovizKur
+          downloaded_filename: teb-current.json
+          postprocess: teb.js
       - name: Fetch isbank data
         uses: githubocto/flat@v3
         with:
