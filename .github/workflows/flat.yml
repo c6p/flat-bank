@@ -49,8 +49,8 @@ jobs:
         uses: githubocto/flat@v3
         if: '!cancelled()'
         with:
-          http_url: https://subesizbankacilik.vakifbank.com.tr/gunlukfinans/GunlukFinans.htm
-          downloaded_filename: vakif-current.html
+          http_url: https://www.ing.com.tr/ProxyManagement/SiteManagerService_Script.aspx/GetCurrencyRates
+          downloaded_filename: vakif-current.json
           postprocess: vakif.js
       - name: Fetch isbank data
         uses: githubocto/flat@v3
