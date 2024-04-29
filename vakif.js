@@ -1,11 +1,13 @@
 import { DOMParser } from "https://deno.land/x/deno_dom/deno-dom-wasm.ts";
 
 const filename = Deno.args[0]
-let document = new DOMParser().parseFromString(await Deno.readTextFile(filename), "text/html")
+await Deno.remove(filename)
 
 const zaman = Math.floor(new Date().getTime() / 1000)
 const file = await Deno.open("vakif.csv", { append: true });
 
+let resp = await fetch('https://subesizbankacilik.vakifbank.com.tr/gunlukfinans/SubesizBankacilik/GunlukDovizKurlari.aspx')
+let document = new DOMParser().parseFromString(await resp.text(), "text/html")
 document.querySelectorAll(".GridStyle tr:not(.sari)").forEach(async tr => {
     const tds = [...tr.querySelectorAll("td")]
     const kur = tds[0].textContent.split(' ')[0]
@@ -17,7 +19,7 @@ document.querySelectorAll(".GridStyle tr:not(.sari)").forEach(async tr => {
 })
 
 const maden = [['ALT/TL', 'XAU'], ['GMS/TL', 'XAG']]
-const resp = await fetch('https://subesizbankacilik.vakifbank.com.tr/gunlukfinans/SubesizBankacilik/AltinFiyatlari.aspx')
+resp = await fetch('https://subesizbankacilik.vakifbank.com.tr/gunlukfinans/SubesizBankacilik/AltinFiyatlari.aspx')
 document = new DOMParser().parseFromString(await resp.text(), "text/html")
 document.querySelectorAll(".GridStyle tr:not(.sari)").forEach(async tr => {
     const tds = [...tr.querySelectorAll("td")]
@@ -30,4 +32,3 @@ document.querySelectorAll(".GridStyle tr:not(.sari)").forEach(async tr => {
 })
 
 file.close()
-await Deno.remove(filename)
