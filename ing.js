@@ -1,5 +1,5 @@
-//const filename = Deno.args[0]
-//await Deno.remove(filename)
+const filename = Deno.args[0]
+await Deno.remove(filename)
 
 const now = new Date()
 const zaman = Math.floor(now.getTime() / 1000)
