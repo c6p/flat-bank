@@ -31,6 +31,13 @@ jobs:
           http_url: https://www.ing.com.tr/ProxyManagement/SiteManagerService_Script.aspx/GetCurrencyRates
           downloaded_filename: ing-current.json
           postprocess: ing.js
+      - name: Fetch garanti data
+        uses: githubocto/flat@v3
+        if: '!cancelled()'
+        with:
+          http_url: https://www.ing.com.tr/ProxyManagement/SiteManagerService_Script.aspx/GetCurrencyRates
+          downloaded_filename: garanti-current.json
+          postprocess: garanti.js  
       - name: Fetch enpara data
         uses: githubocto/flat@v3
         if: '!cancelled()'
