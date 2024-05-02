@@ -45,13 +45,13 @@ jobs:
           http_url: https://www.cepteteb.com.tr/services/GetGunlukDovizKur
           downloaded_filename: teb-current.json
           postprocess: teb.js
-      - name: Fetch vakifbank data
+      - name: Fetch hsbc data
         uses: githubocto/flat@v3
         if: '!cancelled()'
         with:
-          http_url: https://www.ing.com.tr/ProxyManagement/SiteManagerService_Script.aspx/GetCurrencyRates
-          downloaded_filename: vakif-current.json
-          postprocess: vakif.js
+          http_url: https://www.hsbcyatirim.com.tr/api/hsbcdata/getForeignCurrencies
+          downloaded_filename: hsbc-current.json
+          postprocess: hsbc.js
       - name: Fetch isbank data
         uses: githubocto/flat@v3
         if: '!cancelled()'
