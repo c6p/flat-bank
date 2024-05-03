@@ -3,8 +3,6 @@ await Deno.remove(filename)
 
 const now = new Date()
 const zaman = Math.floor(now.getTime() / 1000)
-let offsetMinutes = now.getTimezoneOffset()
-now.setMinutes(now.getMinutes() - offsetMinutes)
 const date = now.toISOString()
 
 const url = "https://www.ing.com.tr/ProxyManagement/SiteManagerService_Script.aspx/GetCurrencyRates"
