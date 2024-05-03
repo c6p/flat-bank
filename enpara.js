@@ -10,10 +10,11 @@ const kurlar = [["usd", "USD"], ["eur", "EUR"], ["altın", "XAU"]]
 const file = await Deno.open("enpara.csv", { append: true });
 document.querySelectorAll("div.enpara-gold-exchange-rates__table-item").forEach(async div => {
     const spans = [...div.querySelectorAll("span")]
-    const kur = kurlar.find((value) => spans[0].textContent.trim().toLocaleLowerCase("tr").includes(value[0]))[1]
+    const kur = kurlar.find((value) => spans[0].textContent.split(' ')[0].toLocaleLowerCase("tr") === value[0])
+    if (!kur) return
     const [alis, satis] = spans.slice(1, 3).map(span => span.textContent.split(' ')[0].replace('.', '').replace(',', '.'))
 
-    const str = `${zaman},${kur},${alis},${satis}\n`
+    const str = `${zaman},${kur[1]},${alis},${satis}\n`
     await file.write(new TextEncoder().encode(str))
 })
 file.close()
