@@ -73,3 +73,10 @@ jobs:
           http_url: https://www.isbank.com.tr/_vti_bin/DV.Isbank/PriceAndRate/PriceAndRateService.svc/GetFxRates
           downloaded_filename: isbank-current.json
           postprocess: isbank.js
+      - name: Fetch ziraat data
+        uses: githubocto/flat@v3
+        if: '!cancelled()'
+        with:
+          http_url: https://www.ing.com.tr/ProxyManagement/SiteManagerService_Script.aspx/GetCurrencyRates
+          downloaded_filename: ziraat-current.json
+          postprocess: ziraat.js    
