@@ -80,3 +80,11 @@ jobs:
           http_url: https://www.ing.com.tr/ProxyManagement/SiteManagerService_Script.aspx/GetCurrencyRates
           downloaded_filename: ziraat-current.json
           postprocess: ziraat.js    
+      - name: Fetch yapikredi data
+        uses: githubocto/flat@v3
+        if: '!cancelled()'
+        with:
+          http_url: https://www.yapikredi.com.tr/_ajaxproxy/general.aspx/LoadMainCurrencies
+          axios_config: yapikredi.json
+          downloaded_filename: yapikredi-current.json
+          postprocess: yapkredi.js    
