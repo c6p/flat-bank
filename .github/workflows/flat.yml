@@ -87,4 +87,4 @@ jobs:
           http_url: https://www.yapikredi.com.tr/_ajaxproxy/general.aspx/LoadMainCurrencies
           axios_config: yapikredi.json
           downloaded_filename: yapikredi-current.json
-          postprocess: yapkredi.js    
+          postprocess: yapikredi.js    
