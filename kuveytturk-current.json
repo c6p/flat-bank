@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+    <link href="https://fonts.googleapis.com/css?family=Kanit:200,300,400,500,600&amp;subset=latin-ext" rel="stylesheet" />
+    <link href="/_assets/css/plugins/icon.css" rel="stylesheet" />
+    <link href="/_assets/css/plugins/bootstrap.min.css" rel="stylesheet" />
+    <link href="/_assets/css/500.css" rel="stylesheet" />
+    <title>Sunucuda geçici bir hata oluştu.</title>
+</head>
+<body class="Page500">
+    <div class="hidden-md hidden-lg">
+        <a href="https://www.seninbankan.com.tr/" target="_blank" class="customer-btn">Müşteri Ol</a>
+        <div class="io">
+            <div class="link">İnternet Şubesi</div>
+            <div class="hover">
+                <a href="https://isube.kuveytturk.com.tr/Login/InitialLogin" target="_blank" rel="nofollow"><span class="icon-Bireysel"></span>Bireysel</a>
+                <a href="https://isube.kuveytturk.com.tr/Login/CorporateInitialLogin" target="_blank" rel="nofollow"><span class="icon-Kurumsal"></span>Kurumsal</a>
+                <a href="https://isube.kuveytturk.com.tr/Login/NewPassword" target="_blank" rel="nofollow"><span class="icon-AnindaSifre"></span>Anında Şifre</a>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+     <header>
+        <div class="sticky">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-4">
+                        <a href="/" class="logo">
+                            <img src="/_assets/img/kuveyt-turk.png" alt="Kuveyt Türk" class="img-responsive" />
+                        </a>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-lg-offset-1 hidden-sm hidden-xs pull-right">
+                        <a href="https://www.seninbankan.com.tr/" target="_blank" class="customer-btn">Müşteri Ol</a>
+                        <div class="io xs-mt-20">
+                            <div class="link">İnternet Şubesi</div>
+                            <div class="hover">
+                                <a href="https://isube.kuveytturk.com.tr/Login/InitialLogin" target="_blank" rel="nofollow"><span class="icon-Bireysel"></span>Bireysel</a>
+                                <a href="https://isube.kuveytturk.com.tr/Login/CorporateInitialLogin" target="_blank" rel="nofollow"><span class="icon-Kurumsal"></span>Kurumsal</a>
+                                <a href="https://isube.kuveytturk.com.tr/Login/NewPassword" target="_blank" rel="nofollow"><span class="icon-AnindaSifre"></span>Anında Şifre</a>                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">        <div class="row">
+            <div class="col-xs-12">
+                <div class="sub-page-banner">
+			        <div class="banner-image" style="background-image:url(/_assets/img/500-img.jpg)"></div>
+			        <div class="banner-text-area text-center col-xs-10 col-xs-offset-1">
+				        Sunucuda geçici bir hata oluştu.
+			        </div>
+		        </div>
+                <div class="page-content">
+                <p class="text-center">Sitemize erişimde geçici bir hata oluştu. Uzmanlarımız en kısa sürede bu hatanın kaynağını<br />tespit ederek çözüm geliştirecektir. İsteğimiz dışında oluşan bu hatadan ötürü özür dileriz.</p>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
