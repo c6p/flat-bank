@@ -92,8 +92,8 @@ jobs:
           postprocess: yapikredi.js
       - name: Set up proxy environment variables
         run: |
-          echo "http_proxy=http://212.57.3.194:8080" >> $GITHUB_ENV
-          echo "https_proxy=http://212.57.3.194:8080" >> $GITHUB_ENV
+          echo "http_proxy=http://176.88.175.190:8080" >> $GITHUB_ENV
+          echo "https_proxy=http://176.88.175.190:8080" >> $GITHUB_ENV
       - name: Fetch vakif data
         uses: githubocto/flat@v3
         if: "!cancelled()"
