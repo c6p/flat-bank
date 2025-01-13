@@ -21,72 +21,83 @@ jobs:
           fetch-depth: 1
       - name: Fetch akbank data
         uses: githubocto/flat@v3
-        if: '!cancelled()'
+        if: "!cancelled()"
         with:
           http_url: https://www.akbank.com/_vti_bin/AkbankServicesSecure/FrontEndServiceSecure.svc/GetCurrencyRates
           downloaded_filename: akbank-current.json
           postprocess: akbank.js
       - name: Fetch ing data
         uses: githubocto/flat@v3
-        if: '!cancelled()'
+        if: "!cancelled()"
         with:
           http_url: https://www.ing.com.tr/ProxyManagement/SiteManagerService_Script.aspx/GetCurrencyRates
           downloaded_filename: ing-current.json
           postprocess: ing.js
       - name: Fetch garanti data
         uses: githubocto/flat@v3
-        if: '!cancelled()'
+        if: "!cancelled()"
         with:
           http_url: https://www.ing.com.tr/ProxyManagement/SiteManagerService_Script.aspx/GetCurrencyRates
           downloaded_filename: garanti-current.json
-          postprocess: garanti.js  
+          postprocess: garanti.js
       - name: Fetch enpara data
         uses: githubocto/flat@v3
-        if: '!cancelled()'
+        if: "!cancelled()"
         with:
           http_url: https://www.qnbfinansbank.enpara.com/hesaplar/doviz-ve-altin-kurlari
           downloaded_filename: enpara-current.html
           postprocess: enpara.js
       - name: Fetch teb data
         uses: githubocto/flat@v3
-        if: '!cancelled()'
+        if: "!cancelled()"
         with:
           http_url: https://www.cepteteb.com.tr/services/GetGunlukDovizKur
           downloaded_filename: teb-current.json
           postprocess: teb.js
       - name: Fetch hsbc data
         uses: githubocto/flat@v3
-        if: '!cancelled()'
+        if: "!cancelled()"
         with:
           http_url: https://www.hsbcyatirim.com.tr/api/hsbcdata/getForeignCurrencies
           downloaded_filename: hsbc-current.json
           postprocess: hsbc.js
       - name: Fetch kuveytturk data
         uses: githubocto/flat@v3
-        if: '!cancelled()'
+        if: "!cancelled()"
         with:
           http_url: https://www.kuveytturk.com.tr/ck0d84?8C5CC4B13366803C5CD94EA5A2119E69
           downloaded_filename: kuveytturk-current.json
           postprocess: kuveytturk.js
       - name: Fetch isbank data
         uses: githubocto/flat@v3
-        if: '!cancelled()'
+        if: "!cancelled()"
         with:
           http_url: https://www.isbank.com.tr/_vti_bin/DV.Isbank/PriceAndRate/PriceAndRateService.svc/GetFxRates
           downloaded_filename: isbank-current.json
           postprocess: isbank.js
       - name: Fetch ziraat data
         uses: githubocto/flat@v3
-        if: '!cancelled()'
+        if: "!cancelled()"
         with:
           http_url: https://www.ing.com.tr/ProxyManagement/SiteManagerService_Script.aspx/GetCurrencyRates
           downloaded_filename: ziraat-current.json
-          postprocess: ziraat.js    
+          postprocess: ziraat.js
       - name: Fetch yapikredi data
         uses: githubocto/flat@v3
-        if: '!cancelled()'
+        if: "!cancelled()"
         with:
           http_url: https://www.yapikredi.com.tr/_ajaxproxy/general.aspx/LoadMainCurrencies
           axios_config: yapikredi.json
           downloaded_filename: yapikredi-current.json
-          postprocess: yapikredi.js    
+          postprocess: yapikredi.js
+      - name: Set up proxy environment variables
+        run: |
+          echo "http_proxy=http://212.57.3.194:8080" >> $GITHUB_ENV
+          echo "https_proxy=http://212.57.3.194:8080" >> $GITHUB_ENV
+      - name: Fetch vakif data
+        uses: githubocto/flat@v3
+        if: "!cancelled()"
+        with:
+          http_url: https://www.ing.com.tr/ProxyManagement/SiteManagerService_Script.aspx/GetCurrencyRates
+          downloaded_filename: vakif-current.json
+          postprocess: vakif.js
