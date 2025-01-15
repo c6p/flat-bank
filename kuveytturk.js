@@ -11,8 +11,7 @@ const replace = { "ALT": "XAU", "GMS": "XAG" }
 for (const { Title, BuyRate, SellRate } of data.filter(({ Title }) => !filterOut.has(Title))) {
   const t = Title.substring(0, 3)
   const title = replace[t] ?? t
-  const [buy, sell] = [BuyRate, SellRate].map(v => v.replace('.', '').replace(',', '.'))
-  const str = `${zaman},${title},${buy},${sell}\n`
+  const str = `${zaman},${title},${BuyRate},${SellRate}\n`
   await file.write(new TextEncoder().encode(str));
 }
 
