@@ -61,13 +61,13 @@ jobs:
           http_url: https://www.hsbcyatirim.com.tr/api/hsbcdata/getForeignCurrencies
           downloaded_filename: hsbc-current.json
           postprocess: hsbc.js
-      #- name: Fetch kuveytturk data
-      #  uses: githubocto/flat@v3
-      #  if: "!cancelled()"
-      #  with:
-      #    http_url: https://www.kuveytturk.com.tr/ck0d84?8C5CC4B13366803C5CD94EA5A2119E69
-      #    downloaded_filename: kuveytturk-current.json
-      #    postprocess: kuveytturk.js
+      - name: Fetch kuveytturk data
+        uses: githubocto/flat@v3
+        if: "!cancelled()"
+        with:
+          http_url: https://www.kuveytturk.com.tr/ck0d84?B83A1EF44DD940F2FEC85646BDB25EA0
+          downloaded_filename: kuveytturk-current.json
+          postprocess: kuveytturk.js
       - name: Fetch isbank data
         uses: githubocto/flat@v3
         if: "!cancelled()"

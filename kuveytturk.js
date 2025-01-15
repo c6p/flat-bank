@@ -3,7 +3,7 @@ import { readJSON } from 'https://deno.land/x/flat/mod.ts'
 const zaman = Math.floor(new Date().getTime() / 1000)
 const file = await Deno.open("kuveytturk.csv", { append: true });
 
-// https://www.kuveytturk.com.tr/ck0d84?8C5CC4B13366803C5CD94EA5A2119E69
+// https://www.kuveytturk.com.tr/ck0d84?B83A1EF44DD940F2FEC85646BDB25EA0
 const filename = Deno.args[0]
 let data = await readJSON(filename)
 const filterOut = new Set(["TL", "CAG (gr)", "Çeyrek", "EUR/USD"])
