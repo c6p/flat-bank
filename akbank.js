@@ -6,18 +6,15 @@ const TIME_OFFSET = 3
 const filename = Deno.args[0]
 const data = await readJSON(filename)
 
-const { cur, date } = JSON.parse(data.GetCurrencyRatesResult)
+const { DovizKurlari, KurGuncellemeZamani } = data.d.Data
 const file = await Deno.open("akbank.csv", { append: true });
-for (const kur of cur) {
-  // gişe değil, banka kuru
-  if (kur.KurTuru === "08") {
-    const tarih = parse(date, "dd.MM.yyyy HH:mm:ss")
-    tarih.setHours(tarih.getHours() - TIME_OFFSET)
-    const zaman = Math.floor(tarih.getTime() / 1000);
-    const { Title, DovizAlis, DovizSatis } = kur
-    const str = `${zaman},${Title},${DovizAlis},${DovizSatis}\n`
-    await file.write(new TextEncoder().encode(str));
-  }
+for (const kur of DovizKurlari) {
+  const tarih = parse(KurGuncellemeZamani, "dd.MM.yyyy HH:mm:ss")
+  tarih.setHours(tarih.getHours() - TIME_OFFSET)
+  const zaman = Math.floor(tarih.getTime() / 1000);
+  const { AlfaKod, DovizAlis, DovizSatis } = kur
+  const str = `${zaman},${AlfaKod},${DovizAlis},${DovizSatis}\n`
+  await file.write(new TextEncoder().encode(str));
 }
 file.close();
 await Deno.remove(filename)

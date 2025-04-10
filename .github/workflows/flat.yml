@@ -23,7 +23,8 @@ jobs:
         uses: githubocto/flat@v3
         if: "!cancelled()"
         with:
-          http_url: https://www.akbank.com/_vti_bin/AkbankServicesSecure/FrontEndServiceSecure.svc/GetCurrencyRates
+          http_url: https://www.akbank.com/_layouts/15/Akbank/CalcTools/Ajax.aspx/GetDovizKurlari
+          axios_config: akbank.json
           downloaded_filename: akbank-current.json
           postprocess: akbank.js
       - name: Fetch ing data
