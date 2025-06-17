@@ -3,5 +3,8 @@
         "Content-Type": "application/json; charset=utf-8",
         "Content-Length": 0
     },
-    "method": "post"
+    "method": "post",
+    "data": {
+        "kurTuru": "8"
+    }
 }
