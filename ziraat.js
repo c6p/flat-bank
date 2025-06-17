@@ -20,7 +20,7 @@ for (const [url, selector, kurName] of [
     document.querySelectorAll(selector).forEach(async tr => {
         const tds = [...tr.querySelectorAll("td")]
         if (tds.length < 4) return
-        const [kur, alis, satis] = [0, 2, 3].map(i => tds[i].textContent)
+        const [kur, alis, satis] = [0, 2, 3].map(i => tds[i].textContent.replaceAll(",", "."))
         const str = `${zaman},${kurName ?? kur},${alis},${satis}\n`
         await file.write(new TextEncoder().encode(str))
     })
