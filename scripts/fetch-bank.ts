@@ -1,9 +1,14 @@
-import { readJSON } from 'https://deno.land/x/flat/mod.ts'
 import { parse, format } from "https://deno.land/std@0.222.1/datetime/mod.ts";
 import { DOMParser } from "https://deno.land/x/deno_dom/deno-dom-wasm.ts";
 import { ensureDir } from "https://deno.land/std@0.222.1/fs/mod.ts";
 
 const TIME_OFFSET = 3;
+
+// Simple JSON reader utility (replacement for flat's readJSON)
+async function readJSON(filename: string): Promise<any> {
+  const text = await Deno.readTextFile(filename);
+  return JSON.parse(text);
+}
 
 interface BankConfig {
   url: string;
@@ -219,14 +224,14 @@ const BANK_CONFIGS: Record<string, BankConfig> = {
       for (const [url, selector, kurName] of [
         ["https://www.ziraatbank.com.tr/tr/_layouts/15/Ziraat/FaizOranlari/Ajax.aspx/GetDovizKurlari", '[data-id="rdIntBranchDoviz"] tr', null],
         ["https://www.ziraatbank.com.tr/tr/_layouts/15/Ziraat/FaizOranlari/Ajax.aspx/GetAltinFiyatlari", '[data-id="rdIntBranchAltin"] tr:nth-child(2)', "XAU"]
-      ]) {
-        let html = (await (await fetch(url, {
+      ] as const) {
+        let html = (await (await fetch(url as string, {
           "headers": { "Content-Type": "core/json" },
           "body": JSON.stringify({ date: format(new Date(), "yyyy-MM-dd") }),
           "method": "POST"
         })).json())?.d?.Data;
-        let document = new DOMParser().parseFromString(html, "text/html");
-        document?.querySelectorAll(selector).forEach(async (tr: any) => {
+        let document = new DOMParser().parseFromString(html || "", "text/html");
+        document?.querySelectorAll(selector as string).forEach(async (tr: any) => {
           const tds = [...tr.querySelectorAll("td")];
           if (tds.length < 4) return;
           const [kur, alis, satis] = [0, 2, 3].map((i: number) => tds[i].textContent.replaceAll(",", "."));
