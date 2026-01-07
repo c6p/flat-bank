@@ -1,0 +1,9 @@
+# Temporary files
+*-current.json
+*-current.html
+
+# Logs
+logs/
+
+# Deno
+.deno/
