@@ -72,7 +72,7 @@ const BANK_CONFIGS: Record<string, BankConfig> = {
   },
 
   garanti: {
-    url: "https://www.ing.com.tr/ProxyManagement/SiteManagerService_Script.aspx/GetCurrencyRates",
+    url: "https://customers.garantibbva.com.tr/internet/digitalpublic/currency-convertor-public/v1/currency-convertor/currency-list-detail",
     downloadedFilename: "garanti-current.json",
     processor: async (filename: string) => {
       await Deno.remove(filename);
@@ -115,14 +115,17 @@ const BANK_CONFIGS: Record<string, BankConfig> = {
       const zaman = Math.floor(new Date().getTime() / 1000);
       const kurlar = [["usd", "USD"], ["eur", "EUR"], ["altın", "XAU"]];
       const file = await Deno.open("enpara.csv", { append: true });
-      document?.querySelectorAll("div.enpara-gold-exchange-rates__table-item").forEach(async (div: any) => {
-        const spans = [...div.querySelectorAll("span")];
-        const kur = kurlar.find((value) => spans[0].textContent.split(' ')[0].toLocaleLowerCase("tr") === value[0]);
-        if (!kur) return;
-        const [alis, satis] = spans.slice(1, 3).map((span: any) => span.textContent.split(' ')[0].replace('.', '').replace(',', '.'));
-        const str = `${zaman},${kur[1]},${alis},${satis}\n`;
-        await file.write(new TextEncoder().encode(str));
-      });
+      const elements = document?.querySelectorAll("div.enpara-gold-exchange-rates__table-item");
+      if (elements) {
+        for (const div of elements) {
+          const spans = [...(div as any).querySelectorAll("span")];
+          const kur = kurlar.find((value) => spans[0].textContent.split(' ')[0].toLocaleLowerCase("tr") === value[0]);
+          if (!kur) continue;
+          const [alis, satis] = spans.slice(1, 3).map((span: any) => span.textContent.split(' ')[0].replace('.', '').replace(',', '.'));
+          const str = `${zaman},${kur[1]},${alis},${satis}\n`;
+          await file.write(new TextEncoder().encode(str));
+        }
+      }
       file.close();
       await Deno.remove(filename);
     }
@@ -215,7 +218,7 @@ const BANK_CONFIGS: Record<string, BankConfig> = {
   },
 
   ziraat: {
-    url: "https://www.ing.com.tr/ProxyManagement/SiteManagerService_Script.aspx/GetCurrencyRates",
+    url: "https://www.ziraatbank.com.tr/tr/_layouts/15/Ziraat/FaizOranlari/Ajax.aspx/GetDovizKurlari",
     downloadedFilename: "ziraat-current.json",
     processor: async (filename: string) => {
       await Deno.remove(filename);
@@ -231,13 +234,16 @@ const BANK_CONFIGS: Record<string, BankConfig> = {
           "method": "POST"
         })).json())?.d?.Data;
         let document = new DOMParser().parseFromString(html || "", "text/html");
-        document?.querySelectorAll(selector as string).forEach(async (tr: any) => {
-          const tds = [...tr.querySelectorAll("td")];
-          if (tds.length < 4) return;
-          const [kur, alis, satis] = [0, 2, 3].map((i: number) => tds[i].textContent.replaceAll(",", "."));
-          const str = `${zaman},${kurName ?? kur},${alis},${satis}\n`;
-          await file.write(new TextEncoder().encode(str));
-        });
+        const elements = document?.querySelectorAll(selector as string);
+        if (elements) {
+          for (const tr of elements) {
+            const tds = [...(tr as any).querySelectorAll("td")];
+            if (tds.length < 4) continue;
+            const [kur, alis, satis] = [0, 2, 3].map((i: number) => tds[i].textContent.replaceAll(",", "."));
+            const str = `${zaman},${kurName ?? kur},${alis},${satis}\n`;
+            await file.write(new TextEncoder().encode(str));
+          }
+        }
       }
       file.close();
     }
@@ -314,13 +320,7 @@ async function fetchBank(bank: string) {
     }
 
     // Save downloaded file
-    const contentType = response.headers.get("content-type") || "";
-    let data: string;
-    if (contentType.includes("text/html")) {
-      data = await response.text();
-    } else {
-      data = await response.text();
-    }
+    const data = await response.text();
     await Deno.writeTextFile(config.downloadedFilename, data);
 
     // Process data
